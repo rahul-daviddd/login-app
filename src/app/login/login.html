@@ -1,0 +1,49 @@
+<div class="login-page">
+    <div class="login-card">
+
+        <h1>Hello!</h1>
+        <p>Sign in to continue</p>
+
+        <form (ngSubmit)="login()">
+            
+            <input
+                type="email"
+                placeholder="Email"
+                [(ngModel)]="email"
+                name="email"
+                required
+            />
+
+            <div class="password-container">
+
+                <input
+                    [type]="showPassword ? 'text' : 'password'"
+                    placeholder="Password"
+                    [(ngModel)]="password"
+                    name="password"
+                    required
+                />
+
+                <span
+                    class="toggle-btn"
+                    (click)="togglePassword()"
+                >
+                    {{ showPassword ? '🙈' : '👁️' }}
+                </span>
+                
+            </div>
+
+            <button
+                type="submit"
+                class="login-btn"
+            >
+                Login
+            </button>
+
+            <p class="switch-page">
+                Don't have an account?
+                <a routerLink="/register">Register here</a>
+            </p>
+        </form>
+    </div>
+</div>
