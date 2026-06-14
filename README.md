@@ -1,59 +1,113 @@
-# LoginApp
+Here is the complete, ready-to-use content for your `README.md` file.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.0.
+```markdown
+# Full-Stack Standalone Login & Registration Application
 
-## Development server
+A modern, responsive, and secure authentication application built using **Angular (v22+)** Standalone Components on the frontend, and a **Node.js/Express** backend paired with a **PostgreSQL** database. 
 
-To start a local development server, run:
+Passwords are encrypted using industry-standard **bcrypt** hashing, and critical system keys are securely managed via environment variables.
 
+---
+
+## 🛠️ Project Architecture & Features
+- **Frontend**: Angular Standalone Architecture, Template-Driven Form Handling with optimized autofill lifecycle synchronization, custom Glassmorphic UI, and animated toast notifications.
+- **Backend**: RESTful API endpoints managed via Node.js and Express.
+- **Security**: Database credential encapsulation, secure password hashing, and Git-protected configuration.
+
+---
+
+## 🚀 Getting Started
+
+### 📋 Prerequisites
+- [Node.js](https://nodejs.org/) (v18 or higher)
+- [PostgreSQL](https://www.postgresql.org/) database
+
+---
+
+### 📡 1. Backend Server Setup
+
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+
+```
+
+2. Install dependencies:
+```bash
+npm install
+
+```
+
+
+3. **Configure Secrets**:
+Copy the example environment file:
+```bash
+cp .env.example .env
+
+```
+
+
+*Note: On Windows CMD, use `copy .env.example .env*`
+Open the `.env` file and update your database credentials:
+```env
+DB_USER=your_postgres_username
+DB_HOST=localhost
+DB_NAME=login_db
+DB_PASSWORD=your_postgres_password
+DB_PORT=5432
+
+```
+
+
+4. Launch the server:
+```bash
+node server.js
+
+```
+
+
+
+---
+
+### 💻 2. Frontend Angular Setup
+
+1. Open a new terminal in the root project folder.
+2. Install dependencies:
+```bash
+npm install
+
+```
+
+
+3. Start the Angular development server:
 ```bash
 ng serve
+
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
+4. Navigate to `http://localhost:4200/` in your browser.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
+## 📂 Key Repository Structure
+
+```text
+├── backend/
+│   ├── .env              # Secure connection parameters (Ignored by Git)
+│   ├── .env.example      # Configuration template
+│   └── server.js         # API Route definitions & database logic
+├── src/
+│   ├── app/
+│   │   ├── login/        # Login component logic & UI
+│   │   ├── register/     # Registration component logic & UI
+│   │   └── home/         # Home dashboard
+│   └── styles.css        # Global animated gradient styles
+├── .gitignore            # Excludes node_modules and .env
+└── README.md             # Project documentation
+
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
 ```
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
 ```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
