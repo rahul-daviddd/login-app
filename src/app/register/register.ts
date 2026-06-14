@@ -13,6 +13,7 @@ export class Register {
   username = '';
   email = '';
   password = '';
+  showPassword = false;
   successMessage = '';
   errorMessage = '';
 
@@ -75,5 +76,8 @@ export class Register {
         this.cdr.detectChanges(); 
       }
     });
+  }
+    togglePassword() {
+      this.showPassword = !this.showPassword;
   }
 }
