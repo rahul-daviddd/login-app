@@ -1,5 +1,3 @@
-Here is the complete, ready-to-use content for your `README.md` file.
-
 ```markdown
 # Full-Stack Standalone Login & Registration Application
 
