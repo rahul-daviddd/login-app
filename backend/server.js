@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
-
+const bcrypt = require('bcrypt');
 const app = express();
 
 app.use(cors());
@@ -34,6 +34,55 @@ app.get('/users', async (req, res) => {
     }
 });
 
+app.post('/register', async (req, res) => {
+    try {
+        const { username, email, password } = req.body;
+        if (!username || !email || !password) {
+            return res.status(400).json({
+                error: 'All fields are required.'
+            });
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {  
+            return res.status(400).json({
+                error: 'Invalid email format.'
+            });
+        }
+
+        if (password.length < 6) {
+            return res.status(400).json({
+                error: 'Password must be at least 6 characters long.'
+            });
+        }
+
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+        const result = await pool.query(
+            `INSERT INTO users (username, email, password)
+             VALUES ($1, $2, $3)
+             RETURNING id, username, email`,
+            [username, email, password]
+        );
+
+        res.status(201).json(result.rows[0]);
+
+    } catch (error) {
+        console.error(error);
+
+        if (error.code === '23505') {
+            return res.status(409).json({
+                error: 'Email already exists'
+            });
+        }
+
+        res.status(500).json({
+            error: 'Failed to register user'
+        });
+    }
+});
+
 app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -57,7 +106,8 @@ app.post('/login', async (req, res) => {
             });
         }
 
-        if (user.password !== password) {
+        const match = await bcrypt.compare(password, user.password);
+        if (!match) {
             return res.status(401).json({
                 error: 'Invalid email or password.'
             });
@@ -76,52 +126,6 @@ app.post('/login', async (req, res) => {
         console.error('Login error:', error);
         res.status(500).json({
             error: 'Failed to log in'
-        });
-    }
-});
-
-app.post('/register', async (req, res) => {
-    try {
-        const { username, email, password } = req.body;
-        if (!username || !email || !password) {
-            return res.status(400).json({
-                error: 'All fields are required.'
-            });
-        }
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {  
-            return res.status(400).json({
-                error: 'Invalid email format.'
-            });
-        }
-
-        if (password.length < 6) {
-            return res.status(400).json({
-                error: 'Password must be at least 6 characters long.'
-            });
-        }
-
-        const result = await pool.query(
-            `INSERT INTO users (username, email, password)
-             VALUES ($1, $2, $3)
-             RETURNING id, username, email`,
-            [username, email, password]
-        );
-
-        res.status(201).json(result.rows[0]);
-
-    } catch (error) {
-        console.error(error);
-
-        if (error.code === '23505') {
-            return res.status(409).json({
-                error: 'Email already exists'
-            });
-        }
-
-        res.status(500).json({
-            error: 'Failed to register user'
         });
     }
 });
