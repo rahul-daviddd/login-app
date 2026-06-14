@@ -63,7 +63,7 @@ app.post('/register', async (req, res) => {
             `INSERT INTO users (username, email, password)
              VALUES ($1, $2, $3)
              RETURNING id, username, email`,
-            [username, email, password]
+            [username, email, hashedPassword]
         );
 
         res.status(201).json(result.rows[0]);
