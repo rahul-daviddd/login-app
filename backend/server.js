@@ -34,6 +34,52 @@ app.get('/users', async (req, res) => {
     }
 });
 
+app.post('/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({
+                error: 'Email and password are required.'
+            });
+        }
+
+        const result = await pool.query(
+            'SELECT * FROM users WHERE email = $1',
+            [email]
+        );
+
+        const user = result.rows[0];
+
+        if (!user) {
+            return res.status(401).json({
+                error: 'Invalid email or password.'
+            });
+        }
+
+        if (user.password !== password) {
+            return res.status(401).json({
+                error: 'Invalid email or password.'
+            });
+        }
+
+        res.status(200).json({
+            message: 'Login successful',
+            user: {
+                id: user.id,
+                username: user.username,
+                email: user.email
+            }
+        });
+
+    } catch (error) {
+        console.error('Login error:', error);
+        res.status(500).json({
+            error: 'Failed to log in'
+        });
+    }
+});
+
 app.post('/register', async (req, res) => {
     try {
         const { username, email, password } = req.body;

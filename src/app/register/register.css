@@ -9,75 +9,101 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #f4f6f9;
+    background: transparent;
+    padding: 20px;
 }
 
 .register-card {
-    width: 400px;
-    background: white;
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 420px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    padding: 50px 40px;
+    border-radius: 24px;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 h1 {
     text-align: center;
     margin-bottom: 8px;
+    color: #1a1a1a;
+    font-weight: 800;
+    font-size: 32px;
 }
 
 p {
     text-align: center;
-    color: #777;
-    margin-bottom: 24px;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 15px;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 16px;
 }
 
 input {
     width: 100%;
-    padding: 14px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
+    padding: 16px;
+    background: #f8f9fa;
+    border: 2px solid transparent;
+    border-radius: 12px;
     font-size: 15px;
     outline: none;
-    transition: border-color 0.2s ease;
+    transition: all 0.3s ease;
+    color: #333;
 }
 
 input:focus {
-    border-color: #4285f4;
+    background: #fff;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
 }
 
 button {
     width: 100%;
-    padding: 14px;
+    padding: 16px;
+    margin-top: 10px;
     border: none;
-    border-radius: 10px;
-    background: #4285f4;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    transition: opacity 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
 button:hover {
-    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.register-card > p:last-child {
+    margin-top: 24px;
+    margin-bottom: 0;
 }
 
 a {
-    color: #4285f4;
+    color: #667eea;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
+    transition: color 0.2s;
 }
 
 a:hover {
-    text-decoration: underline;
+    color: #764ba2;
 }
 
+/* Toast Messages */
 .message-container {
     text-align: center;
     margin-bottom: 15px;
@@ -87,33 +113,27 @@ a:hover {
     position: fixed;
     top: 20px;
     right: 20px;
-    background-color: #4caf50; /* Nice Green */
+    background-color: #4caf50;
     color: white;
     padding: 15px 25px;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
     font-weight: bold;
     z-index: 1000;
-    animation: slideIn 0.3s ease-out;
+    animation: slideIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .error-message {
     display: inline-block;
     background: #ffebee;
     color: #c62828;
-    padding: 8px 14px;
-    border-radius: 999px;
+    padding: 10px 16px;
+    border-radius: 12px;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 @keyframes slideIn {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
 }

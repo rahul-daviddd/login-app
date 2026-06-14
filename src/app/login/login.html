@@ -4,6 +4,20 @@
         <h1>Hello!</h1>
         <p>Sign in to continue</p>
 
+        <div class="message-container">
+            @if (successMessage) {
+                <div class="success-message">
+                    {{ successMessage }}
+                </div>
+            }
+
+            @if (errorMessage) {
+                <div class="error-message">
+                    {{ errorMessage }}
+                </div>
+            }
+        </div>
+
         <form (ngSubmit)="login()">
             
             <input
@@ -44,6 +58,7 @@
                 Don't have an account?
                 <a routerLink="/register">Register here</a>
             </p>
+
         </form>
     </div>
 </div>
