@@ -1,25 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core'; 
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { NgIf } from '@angular/common';
+import { RouterLink, Router } from '@angular/router';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
-  imports: [FormsModule, RouterLink, NgIf],
+  imports: [FormsModule, RouterLink],
   templateUrl: './register.html',
   styleUrl: './register.css',
 })
-
 export class Register {
   username = '';
   email = '';
   password = '';
-
   successMessage = '';
   errorMessage = '';
 
-  constructor(private http: HttpClient) {}
+  private apiUrl = 'http://localhost:3000';
+
+  constructor(
+    private http: HttpClient, 
+    private router: Router,
+    private cdr: ChangeDetectorRef 
+  ) {}
   
   register() {
     this.successMessage = '';
@@ -37,8 +40,7 @@ export class Register {
     }
     
     if (this.password.length < 6) {
-      this.errorMessage =
-        'Password must be at least 6 characters.';
+      this.errorMessage = 'Password must be at least 6 characters.';
       return;
     }
 
@@ -48,28 +50,29 @@ export class Register {
       password: this.password
     };
 
-    this.http.post(
-      'http://localhost:3000/register',
-      user
-    ).subscribe({
+    this.http.post<any>(`${this.apiUrl}/register`, user).subscribe({
       next: (response) => {
         this.errorMessage = '';
         this.successMessage = 'Account created successfully!';
+        this.cdr.detectChanges();
         this.username = '';
         this.email = '';
         this.password = '';
 
         setTimeout(() => {
-          this.successMessage = '';
-        }, 3000);
-
-        console.log('User created.', response);
+          this.router.navigate(['/login']);
+        }, 2000);
       },
 
-      error: (error) => {
+      error: (error: HttpErrorResponse) => {
         this.successMessage = '';
-        this.errorMessage = 'Email already registered.';
-        console.error(error);
+        if (error.status === 409) {
+          this.errorMessage = 'Email already registered.';
+        } else {
+          this.errorMessage = 'Something went wrong. Please try again.';
+        }
+
+        this.cdr.detectChanges(); 
       }
     });
   }

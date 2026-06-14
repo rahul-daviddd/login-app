@@ -6,17 +6,17 @@
 
         <div class="message-container">
 
-            <div
-                class="success-message"
-                *ngIf="successMessage">
-                {{ successMessage }}
-            </div>
+            @if (successMessage) {
+                <div class="success-message">
+                    {{ successMessage }}
+                </div>
+            }
 
-            <div
-                class="error-message"
-                *ngIf="errorMessage">
-                {{ errorMessage }}
-            </div>
+            @if (errorMessage) {
+                <div class="error-message">
+                    {{ errorMessage }}
+                </div>
+            }
 
         </div>
 
