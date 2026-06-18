@@ -131,6 +131,38 @@ app.post('/login', async (req, res) => {
     }
 });
 
+app.put('/users/:id/details', async (req, res) => {
+    try {
+        // Grab the ID from the URL (e.g., /users/59/details -> id is 59)
+        const { id } = req.params;
+        
+        // Grab the data sent from your Angular frontend
+        const { firstName, lastName, dob, gender, countryCode, phoneNumber } = req.body;
+
+        // Update the database securely
+        const result = await pool.query(
+            `UPDATE users 
+             SET first_name = $1, last_name = $2, dob = $3, gender = $4, country_code = $5, phone_number = $6 
+             WHERE id = $7 
+             RETURNING id, username, email, first_name, last_name, dob, gender, country_code, phone_number`,
+            [firstName, lastName, dob, gender, countryCode, phoneNumber, id]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        res.status(200).json({ 
+            message: 'Details updated successfully', 
+            user: result.rows[0] 
+        });
+
+    } catch (error) {
+        console.error('Update error:', error);
+        res.status(500).json({ error: 'Failed to update details' });
+    }
+});
+
 app.listen(3000, () => {
     console.log('Server running on port 3000');
 });
