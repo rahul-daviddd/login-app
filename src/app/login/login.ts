@@ -28,15 +28,13 @@ export class Login {
     private cdr: ChangeDetectorRef) {}
   
   login() {
-    // 1. The 50ms delay gives Chrome's autofill time to sync with Angular's ngModel
+
     setTimeout(() => {
       this.successMessage = '';
       this.errorMessage = '';
 
-      // 2. Basic Validation
       if (!this.email.trim() || !this.password.trim()) {
         this.errorMessage = 'Please enter both email and password.';
-        // Force UI update so you actually see this error if it triggers!
         this.cdr.detectChanges(); 
         return;
       }
@@ -46,11 +44,12 @@ export class Login {
         password: this.password
       };
 
-      // 3. HTTP POST Request to backend
       this.http.post<any>(`${this.apiUrl}/login`, credentials).subscribe({
         next: (response) => {
           this.errorMessage = '';
           this.successMessage = 'Login successful!';
+
+          localStorage.setItem('userId', response.user.id);
           
           this.cdr.detectChanges(); 
 
@@ -70,7 +69,7 @@ export class Login {
           this.cdr.detectChanges();
         }
       });
-    }, 50); // <-- 50 millisecond pause
+    }, 50);
   }
 
   togglePassword() {

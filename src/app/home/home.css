@@ -39,7 +39,39 @@ p {
     line-height: 1.5;
 }
 
-button {
+/* Container to stack the buttons neatly */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* The Primary Button (Blue/Purple from your Login theme) */
+.primary-btn {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.primary-btn:active {
+    transform: translateY(0);
+}
+
+/* The Danger Button (Using your exact red gradient styling!) */
+.danger-btn {
     width: 100%;
     padding: 16px;
     border: none;
@@ -53,11 +85,11 @@ button {
     box-shadow: 0 4px 15px rgba(214, 48, 49, 0.3);
 }
 
-button:hover {
+.danger-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(214, 48, 49, 0.5);
 }
 
-button:active {
+.danger-btn:active {
     transform: translateY(0);
 }

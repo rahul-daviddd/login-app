@@ -1,10 +1,20 @@
 <div class="home-page">
-  <div class="home-card">
+    <div class="home-card">
+        
+        <h1>Welcome Home! 🎉</h1>
+        <p>You have successfully logged in.</p>
 
-    <h1>Welcome Home! 🎉</h1>
-    <p>You have successfully logged in.</p>
-    
-    <button (click)="logout()">Logout</button>
+        <div class="action-buttons">
+            
+            <button class="primary-btn" routerLink="/user-details">
+                Complete Your Profile
+            </button>
+            
+            <button class="danger-btn" (click)="logout()">
+                Logout
+            </button>
 
-  </div>
+        </div>
+
+    </div>
 </div>
