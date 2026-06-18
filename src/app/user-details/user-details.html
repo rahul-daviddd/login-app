@@ -1,0 +1,95 @@
+<div class="details-page">
+    <div class="details-card">
+
+        <h1>Complete Profile</h1>
+        <p>Tell us a bit more about yourself</p>
+
+        <div class="message-container">
+            @if (successMessage) {
+                <div class="success-message">{{ successMessage }}</div>
+            }
+            @if (errorMessage) {
+                <div class="error-message">{{ errorMessage }}</div>
+            }
+        </div>
+
+        <form (ngSubmit)="saveDetails()">
+            
+            <div class="form-row">
+                <input
+                    type="text"
+                    placeholder="First Name"
+                    [(ngModel)]="firstName"
+                    name="firstName"
+                    maxlength="25"
+                    required
+                />
+                <input
+                    type="text"
+                    placeholder="Last Name"
+                    [(ngModel)]="lastName"
+                    name="lastName"
+                    maxlength="25"
+                    required
+                />
+            </div>
+
+            <div class="form-row">
+                <input
+                    type="date"
+                    [(ngModel)]="dob"
+                    name="dob"
+                    (ngModelChange)="calculateAge()"
+                    required
+                />
+
+                <input
+                    type="text"
+                    [value]="calculatedAge !== null ? calculatedAge + ' years old' : 'Age'"
+                    [readonly]="true"
+                    class="readonly-input"
+                    tabindex="-1" 
+                />
+                </div>
+
+            <select [(ngModel)]="gender" name="gender" required>
+                <option value="" disabled selected>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+            </select>
+
+            <div class="phone-row">
+                <input
+                    type="text"
+                    placeholder="Code (e.g., 91)"
+                    [(ngModel)]="countryCode"
+                    name="countryCode"
+                    maxlength="3"
+                    pattern="[0-9]*"
+                    class="country-input"
+                    required
+                />
+                <input
+                    type="text"
+                    placeholder="Phone Number"
+                    [(ngModel)]="phoneNumber"
+                    name="phoneNumber"
+                    maxlength="15"
+                    pattern="[0-9]*"
+                    class="phone-input"
+                    required
+                />
+            </div>
+
+            <button type="submit" class="save-btn">
+                Save Details
+            </button>
+
+            <p class="switch-page">
+                <a routerLink="/home">← Back to Dashboard</a>
+            </p>
+
+        </form>
+    </div>
+</div>
