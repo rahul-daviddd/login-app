@@ -163,6 +163,27 @@ app.put('/users/:id/details', async (req, res) => {
     }
 });
 
+app.get('/users/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const result = await pool.query(
+            `SELECT id, username, email, first_name AS "firstName", last_name AS "lastName", dob, gender, country_code AS "countryCode", phone_number AS "phoneNumber" 
+             FROM users 
+             WHERE id = $1`,
+            [id]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Database error' });
+    }
+});
+
 app.listen(3000, () => {
     console.log('Server running on port 3000');
 });
