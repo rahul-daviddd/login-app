@@ -44,8 +44,7 @@
     @if (activeTab === 'welcome') {
     <div class="content-card">
       <h1>Welcome Home! 🎉</h1>
-      <p>You have successfully logged in to your account. Select an option from the menu on the left to manage your
-        portal workspace.</p>
+      <p>You have successfully logged in to your account.</p>
       <div class="info-box">
         <p>Logged in as: <strong>{{ profile?.email || 'User' }}</strong></p>
       </div>
@@ -125,7 +124,7 @@
       <!-- Sub-view: Incomplete profile form or editing state -->
       <div class="profile-form-view">
         <h2>{{ isEditing ? 'Edit Your Profile' : 'Complete Your Profile' }}</h2>
-        <p class="section-desc">Please supply supplemental registration details below</p>
+        <p class="section-desc">Please fill the details below</p>
 
         <form (ngSubmit)="saveProfile()">
           <div class="form-row">
