@@ -5,7 +5,7 @@
 }
 
 .home-page {
-    height: 100vh;
+    height: calc(100vh - 64px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,26 +16,25 @@
 .home-card {
     width: 100%;
     max-width: 420px;
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(12px);
-    padding: 50px 40px;
-    border-radius: 24px;
-    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid #cbd5e1;
     text-align: center;
 }
 
 h1 {
-    margin-bottom: 10px;
-    color: #1a1a1a;
+    margin-bottom: 8px;
+    color: #0f172a;
     font-weight: 800;
-    font-size: 32px;
+    font-size: 28px;
 }
 
 p {
-    color: #666;
-    margin-bottom: 35px;
-    font-size: 16px;
+    color: #475569;
+    margin-bottom: 24px;
+    font-size: 14px;
     line-height: 1.5;
 }
 
@@ -43,53 +42,51 @@ p {
 .action-buttons {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
 }
 
-/* The Primary Button (Blue/Purple from your Login theme) */
+/* Primary Button */
 .primary-btn {
     width: 100%;
-    padding: 16px;
+    padding: 14px;
     border: none;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    font-size: 16px;
+    border-radius: 0;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    transition: background-color 0.2s ease;
 }
 
 .primary-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    background-color: #1d4ed8;
 }
 
 .primary-btn:active {
-    transform: translateY(0);
+    background-color: #1e3a8a;
 }
 
-/* The Danger Button (Using your exact red gradient styling!) */
+/* Danger Button */
 .danger-btn {
     width: 100%;
-    padding: 16px;
-    border: none;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #ff7675 0%, #d63031 100%);
-    color: white;
-    font-size: 16px;
+    padding: 14px;
+    border: 1px solid #fca5a5;
+    border-radius: 0;
+    background: #fff5f5;
+    color: #dc2626;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 15px rgba(214, 48, 49, 0.3);
+    transition: all 0.2s ease;
 }
 
 .danger-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(214, 48, 49, 0.5);
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border-color: #f87171;
 }
 
 .danger-btn:active {
-    transform: translateY(0);
+    background-color: #fca5a5;
 }

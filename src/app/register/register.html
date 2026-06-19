@@ -38,19 +38,21 @@
                 required
             />
 
-            <input
-                [type]="showPassword ? 'text' : 'password'"
-                placeholder="Password"
-                [(ngModel)]="password"
-                name="password"
-                required
-            />
-            <span
-                class="toggle-btn"
-                (click)="togglePassword()"
-            >
-                {{ showPassword ? '🙈' : '👁️' }}
-            </span>
+            <div class="password-container">
+                <input
+                    [type]="showPassword ? 'text' : 'password'"
+                    placeholder="Password"
+                    [(ngModel)]="password"
+                    name="password"
+                    required
+                />
+                <span
+                    class="toggle-btn"
+                    (click)="togglePassword()"
+                >
+                    {{ showPassword ? '🙈' : '👁️' }}
+                </span>
+            </div>
 
             <button type="submit">
                 Register

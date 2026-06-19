@@ -5,38 +5,37 @@
 }
 
 .details-page {
-    height: 100vh;
+    min-height: calc(100vh - 64px);
     display: flex;
     justify-content: center;
     align-items: center;
     background: transparent;
-    padding: 20px;
+    padding: 40px 20px;
 }
 
 .details-card {
     width: 100%;
     max-width: 500px; 
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(12px);
+    background: #ffffff;
     padding: 40px;
-    border-radius: 24px;
-    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid #cbd5e1;
 }
 
 h1 {
     text-align: center;
     margin-bottom: 8px;
-    color: #1a1a1a;
+    color: #0f172a;
     font-weight: 800;
-    font-size: 28px;
+    font-size: 26px;
 }
 
 p {
     text-align: center;
-    color: #666;
-    margin-bottom: 25px;
-    font-size: 15px;
+    color: #475569;
+    margin-bottom: 24px;
+    font-size: 14px;
 }
 
 form {
@@ -54,121 +53,120 @@ form {
     flex: 1;
 }
 
-/* NEW: Custom flex row specifically for the phone inputs */
 .phone-row {
     display: flex;
-    gap: 8px; /* Slightly tighter gap so they feel connected */
+    gap: 12px;
 }
 
-/* NEW CONCEPT: Flex constraints 
-   flex: 0 0 100px means "Do not shrink, do not grow, stay exactly 100 pixels wide". 
-*/
 .country-input {
-    flex: 0 0 110px;
+    flex: 0 0 100px;
     text-align: center;
 }
 
-/* The phone number input takes up the rest of the available width */
 .phone-input {
     flex: 1;
 }
 
-
 input, select {
     width: 100%;
-    padding: 16px;
-    background: #f8f9fa;
-    border: 2px solid transparent;
-    border-radius: 12px;
-    font-size: 15px;
+    padding: 14px 16px;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 0;
+    font-size: 14px;
     outline: none;
-    transition: all 0.3s ease;
-    color: #333;
+    transition: all 0.2s ease;
+    color: #0f172a;
     font-family: inherit; 
 }
 
 input:focus, select:focus {
-    background: #fff;
-    border-color: #667eea;
-    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
+    background: #ffffff;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 .readonly-input {
-    background-color: #e9ecef;
-    color: #6c757d;
+    background-color: #f1f5f9;
+    color: #475569;
     cursor: not-allowed; 
     font-weight: 600;
     text-align: center;
+    border-color: #cbd5e1;
 }
 
 .save-btn {
     width: 100%;
-    padding: 16px;
+    padding: 14px;
     margin-top: 10px;
     border: none;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    font-size: 16px;
+    border-radius: 0;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    transition: background-color 0.2s ease;
 }
 
 .save-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    background: #1d4ed8;
 }
 
 .save-btn:active {
-    transform: translateY(0);
+    background: #1e3a8a;
 }
 
 .switch-page {
-    margin-top: 20px;
+    margin-top: 16px;
     margin-bottom: 0;
     text-align: center;
+    font-size: 13px;
 }
 
 a {
-    color: #667eea;
+    color: #2563eb;
     text-decoration: none;
     font-weight: 600;
-    transition: color 0.2s;
+    transition: color 0.2s ease;
 }
 
 a:hover {
-    color: #764ba2;
+    color: #1d4ed8;
+    text-decoration: underline;
 }
 
+/* Toast Messages */
 .message-container {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
 }
 
 .success-message {
     position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #4caf50;
-    color: white;
-    padding: 15px 25px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-    font-weight: bold;
+    top: 80px; /* Offset below header */
+    right: 24px;
+    background-color: #10b981;
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 0;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+    font-weight: 600;
+    font-size: 14px;
     z-index: 1000;
-    animation: slideIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .error-message {
-    display: inline-block;
-    background: #ffebee;
-    color: #c62828;
-    padding: 10px 16px;
-    border-radius: 12px;
-    font-size: 14px;
+    display: block;
+    background: #fef2f2;
+    border: 1px solid #fee2e2;
+    color: #b91c1c;
+    padding: 10px 14px;
+    border-radius: 0;
+    font-size: 13px;
     font-weight: 600;
+    text-align: left;
 }
 
 @keyframes slideIn {
