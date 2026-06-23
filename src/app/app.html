@@ -5,11 +5,13 @@
     </div>
     <nav class="nav-links">
       @if (isLoggedIn()) {
-        <a routerLink="/home" routerLinkActive="active">Dashboard</a>
-        <button (click)="logout()" class="nav-logout-btn">Logout</button>
+      <span class="user-greeting">Welcome, <strong>{{ username() }}</strong></span>
+
+      <a routerLink="/home" routerLinkActive="active">Dashboard</a>
+      <button (click)="logout()" class="nav-logout-btn">Logout</button>
       } @else {
-        <a routerLink="/login" routerLinkActive="active">Login</a>
-        <a routerLink="/register" routerLinkActive="active">Register</a>
+      <a routerLink="/login" routerLinkActive="active">Login</a>
+      <a routerLink="/register" routerLinkActive="active">Register</a>
       }
     </nav>
   </div>

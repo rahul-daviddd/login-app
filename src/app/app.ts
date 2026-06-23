@@ -10,7 +10,7 @@ import { RouterOutlet, Router, NavigationEnd, RouterLink, RouterLinkActive } fro
 export class App {
   protected readonly title = signal('login-app');
   isLoggedIn = signal(false);
-
+  username = signal('');
   constructor(private router: Router) {
     // Check initial logged-in state
     this.checkLoginStatus();
@@ -24,12 +24,18 @@ export class App {
   }
 
   private checkLoginStatus() {
-    this.isLoggedIn.set(!!localStorage.getItem('userId'));
+    const userId = localStorage.getItem('userId')
+    this.isLoggedIn.set(!!userId);
+    this.username.set(localStorage.getItem('username') || '')
   }
 
   logout() {
     localStorage.removeItem('userId');
+    localStorage.removeItem('username');
+
     this.isLoggedIn.set(false);
+    this.username.set('');
+
     this.router.navigate(['/login']);
   }
 }
